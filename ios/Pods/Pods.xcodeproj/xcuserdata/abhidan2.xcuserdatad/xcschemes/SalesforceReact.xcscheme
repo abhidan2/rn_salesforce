@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D149C96DFEB6310B2AB71D07B4717394"
-               BuildableName = "libSalesforceReact.a"
+               BuildableName = "SalesforceReact.framework"
                BlueprintName = "SalesforceReact"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

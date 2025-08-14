@@ -1,29 +1,3 @@
-/*
- * Copyright (c) 2020-present, salesforce.com, inc.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided
- * that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list of conditions and the
- * following disclaimer.
- *
- * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
- * the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- * Neither the name of salesforce.com, inc. nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
 import { useState, useEffect } from 'react';
 import {
     StyleSheet,
@@ -34,10 +8,12 @@ import {
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeBottomTabNavigator } from '@bottom-tabs/react-navigation';
 import { oauth, net } from 'react-native-force';
 import React from 'react';
 import WebView from 'react-native-webview';
 import DeviceInfo from 'react-native-device-info';
+import { useBottomTabBarHeight } from 'react-native-bottom-tabs';
 
 interface Response {
     records: Record[]
@@ -55,9 +31,13 @@ interface State {
     data : Record[]
 }
 
+const Tab = createNativeBottomTabNavigator();
+
 function ContactListScreen() {
+    const tabBarHeight = useBottomTabBarHeight();
     const [data, setData] = useState<Record[]>([]);
     const [udid, setUdid] = useState<string>('');
+    const [currentUrl, setCurrentUrl] = useState<string>('');
     useEffect(() => {
         DeviceInfo.getUniqueId().then((uniqueId) => {
         // iOS: "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F9"
@@ -84,16 +64,33 @@ function ContactListScreen() {
         );
     }, []);
   return (
-    <View style={styles.container}>
-        <Text style={{ fontSize: 12, fontWeight: 'bold', marginVertical: 10, marginLeft: 10 }}>
+    <View style={[styles.container, { paddingTop: tabBarHeight + 10 }]}>
+        {/* <Text style={{ fontSize: 12, fontWeight: 'bold', marginVertical: 20, marginLeft: 10 }}>
             {`UDID: ${udid}`}
+        </Text> */}
+        <Text style={{ fontSize: 12, color: 'blue' , fontWeight: 'bold', marginVertical: 20, marginLeft: 10 }}>
+            {`${currentUrl}`}
         </Text>
         <WebView
             source={{ uri: 'https://attone--servicedev.sandbox.my.salesforce.com/' }}
             webviewDebuggingEnabled
             // userAgent="Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3714.0 Mobile Safari/537.36"
             userAgent="Custom User Agent"
-            style={{ flex: 1 }}  />
+            style={{ flex: 1 }}
+            onNavigationStateChange={(navState) => {
+                console.log('Navigation State Change:', navState.url);
+                setCurrentUrl(navState.url);
+            }}
+            onMessage={(event) => {
+                console.log('Message from WebView:', event.nativeEvent.data);
+            }}
+            injectedJavaScript={`
+                (function() {
+                    window.ReactNativeWebView.postMessage("Hello from WebView!");
+                })();
+            `}
+
+        />
     </View>
   )
 }
@@ -101,7 +98,7 @@ function ContactListScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 22,
+        // paddingTop: 22,
         backgroundColor: 'white',
     },
     item: {
@@ -113,15 +110,69 @@ const styles = StyleSheet.create({
 
 const Stack = createStackNavigator();
 
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
+
+
 function App(): JSX.Element {
     return (
         <NavigationContainer>
-          <Stack.Navigator
+        <Tab.Navigator
+            sidebarAdaptable={false}
+            translucent
+            scrollEdgeAppearance='transparent'
+        >
+            <Tab.Screen
+            name="Home"
+            component={ContactListScreen}
+            options={{
+                tabBarIcon: () => ({ sfSymbol: 'book' }),
+            }}
+            />
+            <Tab.Screen
+                name="Lead Central"
+                component={ContactListScreen}
+                options={{
+                    tabBarIcon: () => ({ sfSymbol: 'gear' }),
+            
+                }}
+            />
+            <Tab.Screen
+                name="Leads"
+                component={HomeScreen}
+                options={{
+                    tabBarIcon: () => ({ sfSymbol: 'gear' }),
+            
+                }}
+            />
+            <Tab.Screen
+                name="Cases"
+                component={HomeScreen}
+                options={{
+                    tabBarIcon: () => ({ sfSymbol: 'gear' }),
+            
+                }}
+            />
+            <Tab.Screen
+                name="Menu"
+                component={HomeScreen}
+                options={{
+                    tabBarIcon: () => ({ sfSymbol: 'gear' }),
+            
+                }}
+            />
+        </Tab.Navigator>
+          {/* <Stack.Navigator
             screenOptions={{
                 headerShown: false
             }}>
             <Stack.Screen name="Mobile SDK Sample App" component={ContactListScreen}  />
-          </Stack.Navigator>
+          </Stack.Navigator> */}
         </NavigationContainer>
     );
 }

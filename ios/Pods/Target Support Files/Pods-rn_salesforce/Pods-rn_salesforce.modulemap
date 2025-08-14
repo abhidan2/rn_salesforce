@@ -1,4 +1,4 @@
-module Pods_rn_salesforce {
+framework module Pods_rn_salesforce {
   umbrella header "Pods-rn_salesforce-umbrella.h"
 
   export *

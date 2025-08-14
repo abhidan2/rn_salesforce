@@ -1,3 +1,5 @@
+use_frameworks! :linkage => :static
+
 # Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
@@ -8,6 +10,8 @@ require_relative '../mobile_sdk/SalesforceMobileSDK-iOS/mobilesdk_pods'
 
 platform :ios, '17.0'
 prepare_react_native_project!
+
+
 
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil

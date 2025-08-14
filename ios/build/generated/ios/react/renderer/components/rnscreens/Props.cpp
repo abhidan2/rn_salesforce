@@ -9,31 +9,126 @@
  */
 
 #include <react/renderer/components/rnscreens/Props.h>
+#include <react/renderer/components/image/conversions.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
 namespace facebook::react {
 
+RNSBottomTabsProps::RNSBottomTabsProps(
+    const PropsParserContext &context,
+    const RNSBottomTabsProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+
+    tabBarBackgroundColor(convertRawProp(context, rawProps, "tabBarBackgroundColor", sourceProps.tabBarBackgroundColor, {})),
+    tabBarBlurEffect(convertRawProp(context, rawProps, "tabBarBlurEffect", sourceProps.tabBarBlurEffect, {RNSBottomTabsTabBarBlurEffect::SystemDefault})),
+    tabBarTintColor(convertRawProp(context, rawProps, "tabBarTintColor", sourceProps.tabBarTintColor, {})),
+    tabBarItemTitleFontFamily(convertRawProp(context, rawProps, "tabBarItemTitleFontFamily", sourceProps.tabBarItemTitleFontFamily, {})),
+    tabBarItemTitleFontSize(convertRawProp(context, rawProps, "tabBarItemTitleFontSize", sourceProps.tabBarItemTitleFontSize, {0.0})),
+    tabBarItemTitleFontWeight(convertRawProp(context, rawProps, "tabBarItemTitleFontWeight", sourceProps.tabBarItemTitleFontWeight, {})),
+    tabBarItemTitleFontStyle(convertRawProp(context, rawProps, "tabBarItemTitleFontStyle", sourceProps.tabBarItemTitleFontStyle, {})),
+    tabBarItemTitleFontColor(convertRawProp(context, rawProps, "tabBarItemTitleFontColor", sourceProps.tabBarItemTitleFontColor, {})),
+    tabBarItemTitlePositionAdjustment(convertRawProp(context, rawProps, "tabBarItemTitlePositionAdjustment", sourceProps.tabBarItemTitlePositionAdjustment, {})),
+    tabBarItemIconColor(convertRawProp(context, rawProps, "tabBarItemIconColor", sourceProps.tabBarItemIconColor, {})),
+    tabBarItemBadgeBackgroundColor(convertRawProp(context, rawProps, "tabBarItemBadgeBackgroundColor", sourceProps.tabBarItemBadgeBackgroundColor, {})),
+    tabBarItemTitleFontColorActive(convertRawProp(context, rawProps, "tabBarItemTitleFontColorActive", sourceProps.tabBarItemTitleFontColorActive, {})),
+    tabBarItemIconColorActive(convertRawProp(context, rawProps, "tabBarItemIconColorActive", sourceProps.tabBarItemIconColorActive, {})),
+    tabBarItemTitleFontSizeActive(convertRawProp(context, rawProps, "tabBarItemTitleFontSizeActive", sourceProps.tabBarItemTitleFontSizeActive, {0.0})),
+    tabBarItemActiveIndicatorColor(convertRawProp(context, rawProps, "tabBarItemActiveIndicatorColor", sourceProps.tabBarItemActiveIndicatorColor, {})),
+    tabBarItemActiveIndicatorEnabled(convertRawProp(context, rawProps, "tabBarItemActiveIndicatorEnabled", sourceProps.tabBarItemActiveIndicatorEnabled, {true})),
+    tabBarItemRippleColor(convertRawProp(context, rawProps, "tabBarItemRippleColor", sourceProps.tabBarItemRippleColor, {})),
+    tabBarItemLabelVisibilityMode(convertRawProp(context, rawProps, "tabBarItemLabelVisibilityMode", sourceProps.tabBarItemLabelVisibilityMode, {RNSBottomTabsTabBarItemLabelVisibilityMode::Auto})),
+    tabBarMinimizeBehavior(convertRawProp(context, rawProps, "tabBarMinimizeBehavior", sourceProps.tabBarMinimizeBehavior, {RNSBottomTabsTabBarMinimizeBehavior::Automatic})),
+    controlNavigationStateInJS(convertRawProp(context, rawProps, "controlNavigationStateInJS", sourceProps.controlNavigationStateInJS, {false}))
+      {}
+RNSBottomTabsScreenProps::RNSBottomTabsScreenProps(
+    const PropsParserContext &context,
+    const RNSBottomTabsScreenProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+
+    isFocused(convertRawProp(context, rawProps, "isFocused", sourceProps.isFocused, {false})),
+    tabKey(convertRawProp(context, rawProps, "tabKey", sourceProps.tabKey, {})),
+    tabBarBackgroundColor(convertRawProp(context, rawProps, "tabBarBackgroundColor", sourceProps.tabBarBackgroundColor, {})),
+    tabBarBlurEffect(convertRawProp(context, rawProps, "tabBarBlurEffect", sourceProps.tabBarBlurEffect, {RNSBottomTabsScreenTabBarBlurEffect::SystemDefault})),
+    tabBarItemTitleFontFamily(convertRawProp(context, rawProps, "tabBarItemTitleFontFamily", sourceProps.tabBarItemTitleFontFamily, {})),
+    tabBarItemTitleFontSize(convertRawProp(context, rawProps, "tabBarItemTitleFontSize", sourceProps.tabBarItemTitleFontSize, {0.0})),
+    tabBarItemTitleFontWeight(convertRawProp(context, rawProps, "tabBarItemTitleFontWeight", sourceProps.tabBarItemTitleFontWeight, {})),
+    tabBarItemTitleFontStyle(convertRawProp(context, rawProps, "tabBarItemTitleFontStyle", sourceProps.tabBarItemTitleFontStyle, {})),
+    tabBarItemTitleFontColor(convertRawProp(context, rawProps, "tabBarItemTitleFontColor", sourceProps.tabBarItemTitleFontColor, {})),
+    tabBarItemTitlePositionAdjustment(convertRawProp(context, rawProps, "tabBarItemTitlePositionAdjustment", sourceProps.tabBarItemTitlePositionAdjustment, {})),
+    tabBarItemIconColor(convertRawProp(context, rawProps, "tabBarItemIconColor", sourceProps.tabBarItemIconColor, {})),
+    tabBarItemBadgeBackgroundColor(convertRawProp(context, rawProps, "tabBarItemBadgeBackgroundColor", sourceProps.tabBarItemBadgeBackgroundColor, {})),
+    title(convertRawProp(context, rawProps, "title", sourceProps.title, {})),
+    iconResourceName(convertRawProp(context, rawProps, "iconResourceName", sourceProps.iconResourceName, {})),
+    tabBarItemBadgeTextColor(convertRawProp(context, rawProps, "tabBarItemBadgeTextColor", sourceProps.tabBarItemBadgeTextColor, {})),
+    iconType(convertRawProp(context, rawProps, "iconType", sourceProps.iconType, {RNSBottomTabsScreenIconType::SfSymbol})),
+    iconImageSource(convertRawProp(context, rawProps, "iconImageSource", sourceProps.iconImageSource, {})),
+    iconSfSymbolName(convertRawProp(context, rawProps, "iconSfSymbolName", sourceProps.iconSfSymbolName, {})),
+    selectedIconImageSource(convertRawProp(context, rawProps, "selectedIconImageSource", sourceProps.selectedIconImageSource, {})),
+    selectedIconSfSymbolName(convertRawProp(context, rawProps, "selectedIconSfSymbolName", sourceProps.selectedIconSfSymbolName, {})),
+    badgeValue(convertRawProp(context, rawProps, "badgeValue", sourceProps.badgeValue, {})),
+    specialEffects(convertRawProp(context, rawProps, "specialEffects", sourceProps.specialEffects, {})),
+    overrideScrollViewContentInsetAdjustmentBehavior(convertRawProp(context, rawProps, "overrideScrollViewContentInsetAdjustmentBehavior", sourceProps.overrideScrollViewContentInsetAdjustmentBehavior, {true}))
+      {}
 RNSFullWindowOverlayProps::RNSFullWindowOverlayProps(
     const PropsParserContext &context,
     const RNSFullWindowOverlayProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+
+    accessibilityContainerViewIsModal(convertRawProp(context, rawProps, "accessibilityContainerViewIsModal", sourceProps.accessibilityContainerViewIsModal, {true}))
+      {}
+RNSScreenStackHostProps::RNSScreenStackHostProps(
+    const PropsParserContext &context,
+    const RNSScreenStackHostProps &sourceProps,
     const RawProps &rawProps): ViewProps(context, sourceProps, rawProps)
 
     
+      {}
+RNSSplitViewHostProps::RNSSplitViewHostProps(
+    const PropsParserContext &context,
+    const RNSSplitViewHostProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+
+    preferredDisplayMode(convertRawProp(context, rawProps, "preferredDisplayMode", sourceProps.preferredDisplayMode, {RNSSplitViewHostPreferredDisplayMode::Automatic})),
+    preferredSplitBehavior(convertRawProp(context, rawProps, "preferredSplitBehavior", sourceProps.preferredSplitBehavior, {RNSSplitViewHostPreferredSplitBehavior::Automatic})),
+    primaryEdge(convertRawProp(context, rawProps, "primaryEdge", sourceProps.primaryEdge, {RNSSplitViewHostPrimaryEdge::Leading})),
+    showSecondaryToggleButton(convertRawProp(context, rawProps, "showSecondaryToggleButton", sourceProps.showSecondaryToggleButton, {false})),
+    displayModeButtonVisibility(convertRawProp(context, rawProps, "displayModeButtonVisibility", sourceProps.displayModeButtonVisibility, {RNSSplitViewHostDisplayModeButtonVisibility::Automatic})),
+    columnMetrics(convertRawProp(context, rawProps, "columnMetrics", sourceProps.columnMetrics, {})),
+    presentsWithGesture(convertRawProp(context, rawProps, "presentsWithGesture", sourceProps.presentsWithGesture, {true})),
+    showInspector(convertRawProp(context, rawProps, "showInspector", sourceProps.showInspector, {false}))
+      {}
+RNSSplitViewScreenProps::RNSSplitViewScreenProps(
+    const PropsParserContext &context,
+    const RNSSplitViewScreenProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+
+    columnType(convertRawProp(context, rawProps, "columnType", sourceProps.columnType, {RNSSplitViewScreenColumnType::Column}))
+      {}
+RNSStackScreenProps::RNSStackScreenProps(
+    const PropsParserContext &context,
+    const RNSStackScreenProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
+
+    maxLifecycleState(convertRawProp(context, rawProps, "maxLifecycleState", sourceProps.maxLifecycleState, {0})),
+    screenKey(convertRawProp(context, rawProps, "screenKey", sourceProps.screenKey, {}))
       {}
 RNSModalScreenProps::RNSModalScreenProps(
     const PropsParserContext &context,
     const RNSModalScreenProps &sourceProps,
     const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
 
-    sheetAllowedDetents(convertRawProp(context, rawProps, "sheetAllowedDetents", sourceProps.sheetAllowedDetents, {RNSModalScreenSheetAllowedDetents::Large})),
-    sheetLargestUndimmedDetent(convertRawProp(context, rawProps, "sheetLargestUndimmedDetent", sourceProps.sheetLargestUndimmedDetent, {RNSModalScreenSheetLargestUndimmedDetent::All})),
+    screenId(convertRawProp(context, rawProps, "screenId", sourceProps.screenId, {""})),
+    sheetAllowedDetents(convertRawProp(context, rawProps, "sheetAllowedDetents", sourceProps.sheetAllowedDetents, {})),
+    sheetLargestUndimmedDetent(convertRawProp(context, rawProps, "sheetLargestUndimmedDetent", sourceProps.sheetLargestUndimmedDetent, {-1})),
     sheetGrabberVisible(convertRawProp(context, rawProps, "sheetGrabberVisible", sourceProps.sheetGrabberVisible, {false})),
     sheetCornerRadius(convertRawProp(context, rawProps, "sheetCornerRadius", sourceProps.sheetCornerRadius, {-1.0})),
     sheetExpandsWhenScrolledToEdge(convertRawProp(context, rawProps, "sheetExpandsWhenScrolledToEdge", sourceProps.sheetExpandsWhenScrolledToEdge, {false})),
+    sheetInitialDetent(convertRawProp(context, rawProps, "sheetInitialDetent", sourceProps.sheetInitialDetent, {0})),
+    sheetElevation(convertRawProp(context, rawProps, "sheetElevation", sourceProps.sheetElevation, {24})),
     customAnimationOnSwipe(convertRawProp(context, rawProps, "customAnimationOnSwipe", sourceProps.customAnimationOnSwipe, {false})),
     fullScreenSwipeEnabled(convertRawProp(context, rawProps, "fullScreenSwipeEnabled", sourceProps.fullScreenSwipeEnabled, {false})),
-    fullScreenSwipeShadowEnabled(convertRawProp(context, rawProps, "fullScreenSwipeShadowEnabled", sourceProps.fullScreenSwipeShadowEnabled, {false})),
+    fullScreenSwipeShadowEnabled(convertRawProp(context, rawProps, "fullScreenSwipeShadowEnabled", sourceProps.fullScreenSwipeShadowEnabled, {true})),
     homeIndicatorHidden(convertRawProp(context, rawProps, "homeIndicatorHidden", sourceProps.homeIndicatorHidden, {false})),
     preventNativeDismiss(convertRawProp(context, rawProps, "preventNativeDismiss", sourceProps.preventNativeDismiss, {false})),
     gestureEnabled(convertRawProp(context, rawProps, "gestureEnabled", sourceProps.gestureEnabled, {true})),
@@ -46,7 +141,7 @@ RNSModalScreenProps::RNSModalScreenProps(
     gestureResponseDistance(convertRawProp(context, rawProps, "gestureResponseDistance", sourceProps.gestureResponseDistance, {})),
     stackPresentation(convertRawProp(context, rawProps, "stackPresentation", sourceProps.stackPresentation, {RNSModalScreenStackPresentation::Push})),
     stackAnimation(convertRawProp(context, rawProps, "stackAnimation", sourceProps.stackAnimation, {RNSModalScreenStackAnimation::Default})),
-    transitionDuration(convertRawProp(context, rawProps, "transitionDuration", sourceProps.transitionDuration, {350})),
+    transitionDuration(convertRawProp(context, rawProps, "transitionDuration", sourceProps.transitionDuration, {500})),
     replaceAnimation(convertRawProp(context, rawProps, "replaceAnimation", sourceProps.replaceAnimation, {RNSModalScreenReplaceAnimation::Pop})),
     swipeDirection(convertRawProp(context, rawProps, "swipeDirection", sourceProps.swipeDirection, {RNSModalScreenSwipeDirection::Horizontal})),
     hideKeyboardOnSwipe(convertRawProp(context, rawProps, "hideKeyboardOnSwipe", sourceProps.hideKeyboardOnSwipe, {false})),
@@ -63,19 +158,36 @@ RNSScreenContainerProps::RNSScreenContainerProps(
 
     
       {}
+RNSScreenContentWrapperProps::RNSScreenContentWrapperProps(
+    const PropsParserContext &context,
+    const RNSScreenContentWrapperProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps)
+
+    
+      {}
+RNSScreenFooterProps::RNSScreenFooterProps(
+    const PropsParserContext &context,
+    const RNSScreenFooterProps &sourceProps,
+    const RawProps &rawProps): ViewProps(context, sourceProps, rawProps)
+
+    
+      {}
 RNSScreenProps::RNSScreenProps(
     const PropsParserContext &context,
     const RNSScreenProps &sourceProps,
     const RawProps &rawProps): ViewProps(context, sourceProps, rawProps),
 
-    sheetAllowedDetents(convertRawProp(context, rawProps, "sheetAllowedDetents", sourceProps.sheetAllowedDetents, {RNSScreenSheetAllowedDetents::Large})),
-    sheetLargestUndimmedDetent(convertRawProp(context, rawProps, "sheetLargestUndimmedDetent", sourceProps.sheetLargestUndimmedDetent, {RNSScreenSheetLargestUndimmedDetent::All})),
+    screenId(convertRawProp(context, rawProps, "screenId", sourceProps.screenId, {""})),
+    sheetAllowedDetents(convertRawProp(context, rawProps, "sheetAllowedDetents", sourceProps.sheetAllowedDetents, {})),
+    sheetLargestUndimmedDetent(convertRawProp(context, rawProps, "sheetLargestUndimmedDetent", sourceProps.sheetLargestUndimmedDetent, {-1})),
     sheetGrabberVisible(convertRawProp(context, rawProps, "sheetGrabberVisible", sourceProps.sheetGrabberVisible, {false})),
     sheetCornerRadius(convertRawProp(context, rawProps, "sheetCornerRadius", sourceProps.sheetCornerRadius, {-1.0})),
     sheetExpandsWhenScrolledToEdge(convertRawProp(context, rawProps, "sheetExpandsWhenScrolledToEdge", sourceProps.sheetExpandsWhenScrolledToEdge, {false})),
+    sheetInitialDetent(convertRawProp(context, rawProps, "sheetInitialDetent", sourceProps.sheetInitialDetent, {0})),
+    sheetElevation(convertRawProp(context, rawProps, "sheetElevation", sourceProps.sheetElevation, {24})),
     customAnimationOnSwipe(convertRawProp(context, rawProps, "customAnimationOnSwipe", sourceProps.customAnimationOnSwipe, {false})),
     fullScreenSwipeEnabled(convertRawProp(context, rawProps, "fullScreenSwipeEnabled", sourceProps.fullScreenSwipeEnabled, {false})),
-    fullScreenSwipeShadowEnabled(convertRawProp(context, rawProps, "fullScreenSwipeShadowEnabled", sourceProps.fullScreenSwipeShadowEnabled, {false})),
+    fullScreenSwipeShadowEnabled(convertRawProp(context, rawProps, "fullScreenSwipeShadowEnabled", sourceProps.fullScreenSwipeShadowEnabled, {true})),
     homeIndicatorHidden(convertRawProp(context, rawProps, "homeIndicatorHidden", sourceProps.homeIndicatorHidden, {false})),
     preventNativeDismiss(convertRawProp(context, rawProps, "preventNativeDismiss", sourceProps.preventNativeDismiss, {false})),
     gestureEnabled(convertRawProp(context, rawProps, "gestureEnabled", sourceProps.gestureEnabled, {true})),
@@ -88,7 +200,7 @@ RNSScreenProps::RNSScreenProps(
     gestureResponseDistance(convertRawProp(context, rawProps, "gestureResponseDistance", sourceProps.gestureResponseDistance, {})),
     stackPresentation(convertRawProp(context, rawProps, "stackPresentation", sourceProps.stackPresentation, {RNSScreenStackPresentation::Push})),
     stackAnimation(convertRawProp(context, rawProps, "stackAnimation", sourceProps.stackAnimation, {RNSScreenStackAnimation::Default})),
-    transitionDuration(convertRawProp(context, rawProps, "transitionDuration", sourceProps.transitionDuration, {350})),
+    transitionDuration(convertRawProp(context, rawProps, "transitionDuration", sourceProps.transitionDuration, {500})),
     replaceAnimation(convertRawProp(context, rawProps, "replaceAnimation", sourceProps.replaceAnimation, {RNSScreenReplaceAnimation::Pop})),
     swipeDirection(convertRawProp(context, rawProps, "swipeDirection", sourceProps.swipeDirection, {RNSScreenSwipeDirection::Horizontal})),
     hideKeyboardOnSwipe(convertRawProp(context, rawProps, "hideKeyboardOnSwipe", sourceProps.hideKeyboardOnSwipe, {false})),
