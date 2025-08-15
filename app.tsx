@@ -14,6 +14,7 @@ import React from 'react';
 import WebView from 'react-native-webview';
 import DeviceInfo from 'react-native-device-info';
 import { useBottomTabBarHeight } from 'react-native-bottom-tabs';
+import { SFSymbol } from 'react-native-sfsymbols';
 
 interface Response {
     records: Record[]
@@ -114,6 +115,16 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home!</Text>
+      <SFSymbol
+        name="thermometer.sun.fill"
+        weight="semibold"
+        scale="large"
+        color="red"
+        size={16}
+        resizeMode="center"
+        multicolor={false}
+        style={{ width: 32, height: 32 }}
+      />
     </View>
   );
 }

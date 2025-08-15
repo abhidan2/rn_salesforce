@@ -6095,6 +6095,11 @@ react-native-screens@^4.0.0, "react-native-screens@>= 4.0.0":
     react-native-is-edge-to-edge "^1.2.1"
     warn-once "^0.1.0"
 
+react-native-sfsymbols@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/react-native-sfsymbols/-/react-native-sfsymbols-1.2.2.tgz"
+  integrity sha512-/9zshSuIlvCTnD9yfrD7/AbO/Vhlcml8GEri9gLa+sRhZL2ZFvqTOopiRJdC9+eWO+NVtLN+qX8FNXm5y5URSQ==
+
 react-native-timer@^1.3.6:
   version "1.3.6"
   resolved "https://registry.npmjs.org/react-native-timer/-/react-native-timer-1.3.6.tgz"

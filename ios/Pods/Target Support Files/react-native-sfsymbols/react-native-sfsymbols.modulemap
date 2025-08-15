@@ -1,0 +1,6 @@
+framework module react_native_sfsymbols {
+  umbrella header "react-native-sfsymbols-umbrella.h"
+
+  export *
+  module * { export * }
+}
